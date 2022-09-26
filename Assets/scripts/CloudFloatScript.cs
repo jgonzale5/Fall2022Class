@@ -13,7 +13,7 @@ public class CloudFloatScript : MonoBehaviour
     void Start()
     {
         //Debug.Log("Hello world");
-        Debug.Log(this.name);
+        //Debug.Log(this.name);
     }
 
     // Update is called once per frame
