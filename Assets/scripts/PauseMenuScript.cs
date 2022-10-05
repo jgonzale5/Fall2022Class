@@ -9,9 +9,11 @@ public class PauseMenuScript : MonoBehaviour
     public GameObject menu;
     public TextMeshProUGUI testingText;
     public KeyCode testingKey;
+    public bool isPaused = false;
 
     void Start()
     {
+        Time.timeScale = 1f;
         menu.SetActive(false);
     }
 
@@ -47,11 +49,29 @@ public class PauseMenuScript : MonoBehaviour
 
         if (Input.GetButtonDown("Cancel"))
         {
-            //Will only open menu 
-            //menu.SetActive(true);
+            TogglePauseGame();
+        }
+    }
 
-            //Will open menu if it's closed, close it if it's open
-            menu.SetActive(!menu.activeInHierarchy);
+    public void TogglePauseGame()
+    {
+        //Will only open menu 
+        //menu.SetActive(true);
+
+        isPaused = !isPaused;
+
+        //Will open menu if it's closed, close it if it's open
+        //menu.SetActive(!menu.activeInHierarchy);
+        menu.SetActive(isPaused);
+
+        //if (isPaused == true)
+        if (isPaused)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
         }
     }
 
