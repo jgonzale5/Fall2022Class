@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ScoreTrigger : MonoBehaviour
 {
-    int score = 0;
+    //The static keyword makes it shared between all instances of this script
+    static int score = 0;
 
     void OnTriggerEnter(Collider other)
     {
@@ -17,7 +18,7 @@ public class ScoreTrigger : MonoBehaviour
             //score = score + 1;
             //and increases the value of score by 1
 
-            Debug.Log(score);
+            Debug.Log(transform.name + " : " + score);
         }
     }
 }
