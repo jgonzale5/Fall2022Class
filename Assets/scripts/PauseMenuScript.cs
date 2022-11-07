@@ -13,6 +13,9 @@ public class PauseMenuScript : MonoBehaviour
 
     void Start()
     {
+        if (GameManager.Instance != null)
+            GameManager.Instance.UnPauseMusic();
+
         Time.timeScale = 1f;
         menu.SetActive(false);
     }
@@ -68,15 +71,24 @@ public class PauseMenuScript : MonoBehaviour
         if (isPaused)
         {
             Time.timeScale = 0f;
+            //GameManager.Instance.audio.pitch = 0f;
+            GameManager.Instance.PauseMusic();
         }
         else
         {
             Time.timeScale = 1f;
+            //GameManager.Instance.audio.pitch = 1f;
+            GameManager.Instance.UnPauseMusic();
         }
     }
 
     public void LoadLevel(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+    }
+
+    public void PlaySound(AudioClip clip)
+    {
+        GameManager.Instance.audio.PlayOneShot(clip);
     }
 }
