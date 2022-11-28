@@ -7,6 +7,9 @@ public class MovementScript : MonoBehaviour
     //The speed of the object with this script
     public float speed;
 
+    //The amount of angles that our player will rotate in a second
+    public float angleSpeed = 20;
+
     //The length of the raycast used to determine if there's an obstacle in the way
     public float skinWidth = 0.1f;
 
@@ -16,6 +19,7 @@ public class MovementScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        #region Movement
         //We get the user input and store it in local variables
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
@@ -38,13 +42,22 @@ public class MovementScript : MonoBehaviour
 
         //We set the new position of the transform this frame
         //Local
-        this.transform.localPosition = this.transform.localPosition + new Vector3(x, y, 0);
+        //this.transform.localPosition = this.transform.localPosition + new Vector3(x, y, 0);
+        this.transform.position = this.transform.position + (this.transform.up * y) + (this.transform.right * x);
         //World
         //this.transform.position = this.transform.position + new Vector3(x, y, 0);
         //Equivalent to this as well
         //this.transform.position = new Vector3(this.transform.position.x + x, 
         //    this.transform.position.y + y, this.transform.position.z + 0);
+        #endregion
 
+        #region Rotation
+        float rotX = Input.GetAxisRaw("Rotation") * angleSpeed * Time.deltaTime;
+
+        this.transform.rotation = Quaternion.Euler(0, 0, this.transform.eulerAngles.z + rotX); 
+        
+
+        #endregion
     }
 
     bool CheckForWall(Vector3 direction, float range)
